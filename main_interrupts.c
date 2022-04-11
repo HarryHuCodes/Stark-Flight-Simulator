@@ -173,6 +173,7 @@ void draw_countdown(int x, short int colour);
 
 // CONFIGURE INTERRUPTS
 void PS2_ISR(void);
+void KEY_ISR(void);
 void set_A9_IRQ_stack(void);
 void config_GIC(void);
 void config_HPS_timer(void);
@@ -190,17 +191,18 @@ unsigned char byte1 = 0;
 unsigned char byte2 = 0;
 unsigned char byte3 = 0;
 
+   bool readyToStartGame = false;
 int main(void)
 {
   set_A9_IRQ_stack();
-  config_GIC(); 
-  config_PS2();          // configure ps2 to generate interrupts
-  config_KEYs();
-  enable_A9_interrupts(); // enable interrupts
-  volatile int *pixel_ctrl_ptr = (int *)PIXEL_BUF_CTRL_BASE;
+    config_GIC();
+    config_KEYs();
+    config_PS2();
+    enable_A9_interrupts();
+	
+	
+volatile int *pixel_ctrl_ptr = (int *)PIXEL_BUF_CTRL_BASE;
   volatile int *PS2_ptr = (int *)PS2_BASE;
-
-  *PS2_ptr = 0xFF; // reset
 
 
   //--------------------------------------------------------------------
@@ -220,46 +222,32 @@ int main(void)
 
   //Start screen
    bool readyToStart = false;
-   bool readyToStartGame = false;
    bool gameStart = false;
    bool playerReady = false;  
    draw_full_screen(start_screen);
    wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
    pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
 
-   while(readyToStartGame == false)
+   while(1)
    {
-         int keyValue = *keyPtr;
-         if(keyValue == 2)
-         {
-			readyToStart = true;
-			
-     	 }
-         else if(keyValue == 0 && readyToStart == true)
-         {
-			readyToStartGame = true;
-			printf("Proceeding to mission screen. \n");
-            
-       		
-         }
-     }
+	printf("while1\n");
+     if(readyToStartGame == true) {
+		printf("readytoStartTrue this should work\n");
+	 	break;
+	 }
+	    
+   }
 	
 	printf("Here are the mission details. \n"); 
 	draw_full_screen(mission_screen);
 	wait_for_vsync();  
 	pixel_buffer_start = *(pixel_ctrl_ptr + 1);
-			
-	while(gameStart == false){
-		int keyValue = *keyPtr;
-		if(keyValue == 2)
-		{
-			  playerReady = true;
-		}
-		else if(keyValue == 0 && playerReady == true)
-		{
-			  gameStart = true;
-			  printf("Game starting... \n");
-	     }
+  readyToStartGame = false;
+	while(1){
+			printf("while2\n");
+	      if(readyToStartGame == true) {
+	 	break;
+	 }
 	}
 	
    printf("Game started!\n");
@@ -327,65 +315,6 @@ clear_screen();
     }
 
 
-
-	// Handle PS2 input
-    int PS2_data = *(PS2_ptr);        // read the Data register in the PS/2 port
-    int RVALID = (PS2_data & 0x8000); // compare to RVALID field
-	if (RVALID)
-    {
-      /* always save the last three bytes received */
-      byte1 = byte2;
-      byte2 = byte3;
-      byte3 = PS2_data & 0xFF; // load fresh data to b3 and shift old data to b2 -> b1
-
-      //“& 0xff” effectively masks the variable so it leaves only the value in the last 8 bits,
-      //ignores all the rest of the bits.
-
-
-		if ((byte2 == (char)0xAA) && (byte3 == (char)0x00))
-		{
-		  *(PS2_ptr) = 0xF4;
-		}
-
-	}
-
-      //checks for arrow keys
-      if ((arrow_key(byte1, byte2, byte3) == 1))
-      { //Down arrow
-		  printf("down: %d\n", y_coor_d);
-
-			score++;
-			printf("score: %d\n", score);
-			display_hex(score);
-
-      }
-      if ((arrow_key(byte1, byte2, byte3) == 2))
-      { //Up arrow
-		printf("up: %d\n", y_coor_u);
-
-			score++;
-			printf("score: %d\n", score);
-			display_hex(score);
-
-      }
-      if ((arrow_key(byte1, byte2, byte3) == 3))
-      { //Left arrow
-		  printf("left: %d\n", y_coor_l);
-
-			score++;
-			printf("score: %d\n", score);
-			display_hex(score);
-
-      }
-      if ((arrow_key(byte1, byte2, byte3) == 4))
-      { //Right arrow
-		  printf("right: %d\n", y_coor_r);
-
-			score++;
-			printf("score: %d\n", score);
-			display_hex(score);
-
-      }
 
 
 
@@ -759,6 +688,7 @@ void config_KEYs()
 
 void config_PS2() {
 	volatile int * PS2_ptr = (int *) 0xFF200100; // PS/2 base address
+
 	*(PS2_ptr + 1) = 0x00000001; // set RE to 1 to enable interrupts
 }
 
@@ -768,76 +698,99 @@ void config_PS2() {
 */
 void set_A9_IRQ_stack(void)
 {
-  int stack, mode;
-  stack = A9_ONCHIP_END - 7; // top of A9 onchip memory, aligned to 8 bytes
-  /* change processor to IRQ mode with interrupts disabled */
-  mode = 0b11010010;
-  asm("msr cpsr, %[ps]"
-      :
-      : [ps] "r"(mode));
-  /* set banked stack pointer */
-  asm("mov sp, %[ps]"
-      :
-      : [ps] "r"(stack));
-  /* go back to SVC mode before executing subroutine return! */
-  mode = 0b11010011;
-  asm("msr cpsr, %[ps]"
-      :
-      : [ps] "r"(mode));
+    int stack, mode;
+    stack = A9_ONCHIP_END - 7;		// top of A9 onchip memory, aligned to 8 bytes
+    /* change processor to IRQ mode with interrupts disabled */
+    mode = INT_DISABLE | IRQ_MODE;
+    asm("msr cpsr, %[ps]" : : [ps] "r" (mode));
+    /* set banked stack pointer */
+    asm("mov sp, %[ps]" : : [ps] "r" (stack));
+
+    /* go back to SVC mode before executing subroutine return! */
+    mode = INT_DISABLE | SVC_MODE;
+    asm("msr cpsr, %[ps]" : : [ps] "r" (mode));
 }
+
 /*
-* Turn on interrupts in the ARM processor
+ * Turn on interrupts in the ARM processor
 */
 void enable_A9_interrupts(void)
 {
-  int status = 0b01010011;
-  asm("msr cpsr, %[ps]"
-      :
-      : [ps] "r"(status));
+    int status = SVC_MODE | INT_ENABLE;
+    asm("msr cpsr,%[ps]" : : [ps]"r"(status));
 }
-/*
-* Turn off interrupts in the ARM processor
-*/
-void disable_A9_interrupts(void) {
-    int status = 0b11010011;
-    asm("msr cpsr, %[ps]" : : [ps] "r"(status));
+
+void disable_A9_interrupts(void)
+{
+    int status = SVC_MODE | INT_DISABLE;
+    asm("msr cpsr,%[ps]" : : [ps]"r"(status));
 }
 /*
 * Configure the Generic Interrupt Controller (GIC)
 */
-void config_GIC(void) {
-    config_interrupt (79, 0x01); // configure the FPGA KEYs interrupt (79)
-    // Set Interrupt Priority Mask Register (ICCPMR). Enable interrupts of all
-    // priorities
-    *((int *) 0xFFFEC104) = 0xFFFF;
-    // Set CPU Interface Control Register (ICCICR). Enable signaling of
-    // interrupts
-    *((int *) 0xFFFEC100) = 1;
-    // Configure the Distributor Control Register (ICDDCR) to send pending
-    // interrupts to CPUs
-    *((int *) 0xFFFED000) = 1;
+void config_GIC(void)
+{
+    int address;	// used to calculate register addresses
+    
+    /* configure the HPS timer interrupt */
+    *((int *)0xFFFED8C4) = 0x01000000; 
+    *((int *)0xFFFED118) = 0x00000080;
+    
+    /* configure the FPGA interval timer and KEYs interrupts */
+   	config_interrupt (PS2_IRQ, CPU0);
+	  config_interrupt (KEYS_IRQ, CPU0);
+    config_interrupt (INTERVAL_TIMER_IRQ, CPU0);
+    
+    // Set Interrupt Priority Mask Register (ICCPMR). Enable interrupts for lowest priority
+    address = MPCORE_GIC_CPUIF + ICCPMR;
+    *((int *) address) = 0xFFFF;
+
+    // Set CPU Interface Control Register (ICCICR). Enable signaling of interrupts
+    address = MPCORE_GIC_CPUIF + ICCICR;
+    *((int *) address) = ENABLE;
+
+    // Configure the Distributor Control Register (ICDDCR) to send pending interrupts to CPUs
+    address = MPCORE_GIC_DIST + ICDDCR;
+    *((int *) address) = ENABLE;
+	
 }
 
-void config_interrupt(int N, int CPU_target) {
-    int reg_offset, index, value, address;
-    /* Configure the Interrupt Set-Enable Registers (ICDISERn).
-    * reg_offset = (integer_div(N / 32) * 4
-    * value = 1 << (N mod 32) */
-    reg_offset = (N >> 3) & 0xFFFFFFFC;
-    index = N & 0x1F;
-    value = 0x1 << index;
-    address = 0xFFFED100 + reg_offset;
-    /* Now that we know the register address and value, set the appropriate bit */
-    *(int *)address |= value;
-    /* Configure the Interrupt Processor Targets Register (ICDIPTRn)
-    * reg_offset = integer_div(N / 4) * 4
-    * index = N mod 4 */
-    reg_offset = (N & 0xFFFFFFFC);
-    index = N & 0x3;
-    address = 0xFFFED800 + reg_offset + index;
-    /* Now that we know the register address and value, write to (only) the
-    * appropriate byte */
-    *(char *)address = (char)CPU_target;
+/*
+ * Configure registers in the GIC for individual interrupt IDs.
+*/
+void config_interrupt (int int_ID, int CPU_target)
+{
+    int n, addr_offset, value, address;
+    /* Set Interrupt Processor Targets Register (ICDIPTRn) to cpu0.
+     * n = integer_div(int_ID / 4) * 4
+     * addr_offet = #ICDIPTR + n
+     * value = CPU_target << ((int_ID & 0x3) * 8)
+     */
+    n = (int_ID >> 2) << 2;
+    addr_offset = ICDIPTR + n;
+    value = CPU_target << ((int_ID & 0x3) << 3);
+
+    /* Now that we know the register address and value, we need to set the correct bits in
+     * the GIC register, without changing the other bits */
+    address = MPCORE_GIC_DIST + addr_offset;
+    hw_write_bits((int *) address, 0xff << ((int_ID & 0x3) << 3), value);
+
+    /* Set Interrupt Set-Enable Registers (ICDISERn).
+     * n = (integer_div(in_ID / 32) * 4
+     * addr_offset = 0x100 + n
+     * value = enable << (int_ID & 0x1F) */
+    n = (int_ID >> 5) << 2;
+    addr_offset = ICDISER + n;
+    value = 0x1 << (int_ID & 0x1f);
+    /* Now that we know the register address and value, we need to set the correct bits in
+     * the GIC register, without changing the other bits */
+    address = MPCORE_GIC_DIST + addr_offset;
+    hw_write_bits((int *) address, 0x1 << (int_ID & 0x1f), value);
+}
+
+void hw_write_bits(volatile int * addr, volatile int unmask, volatile int value)
+{
+    *addr = ((~unmask) & *addr) | value;
 }
 
 void __attribute__((interrupt)) __cs3_isr_irq(void)
@@ -846,16 +799,24 @@ void __attribute__((interrupt)) __cs3_isr_irq(void)
   // Read the ICCIAR from the processor interface
   int int_ID = *((int *)0xFFFEC10C);
   printf("%d\n", int_ID);
-  if (int_ID == 79) // check if interrupt is from the KEYs
+  
+  if (int_ID == PS2_IRQ) // check if interrupt is from the PS2
   {
-    PS2_ISR();
-    return;
+	  printf("ps2\n");
+      PS2_ISR();
+  } else if (int_ID == KEYS_IRQ) { // key interrupt
+	  printf("key\n");
+	  KEY_ISR();
   }
-  else
+  else {
+	  printf("else\n");
     while (1)
       ; // if unexpected, then stay here
-  // Write to the End of Interrupt Register (ICCEOIR)
+  } 
+	  printf("write to end of interrupt\n");
+	  // Write to the End of Interrupt Register (ICCEOIR)
   *((int *)0xFFFEC110) = int_ID;
+	return;
 }
 
 // Define the remaining exception handlers
@@ -884,6 +845,24 @@ void __attribute__((interrupt)) __cs3_isr_fiq(void) {
 }
 
 // PS2 Exception Handler
+void KEY_ISR(void) {
+  	printf("keyISR bullshit");
+	volatile int *KEY_ptr = (int *) KEY_BASE;
+    int press;
+    press = *(KEY_ptr + 3); // read the pushbutton edgecapture register
+	
+	if (press == 2) {
+        printf("ready to start set true \n");
+		readyToStartGame = true;
+	}
+	
+    *(KEY_ptr + 3) = press; // Clear the interrupt
+    key_dir ^= 1; // Toggle key_dir value
+	printf("return out\n");
+    return;
+	
+}
+
 
 void PS2_ISR( void )
 {
