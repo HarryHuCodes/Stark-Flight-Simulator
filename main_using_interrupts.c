@@ -1,3 +1,4 @@
+// old interrupts
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -133,7 +134,8 @@ const uint8_t up[];
 const uint8_t down[];
 const uint8_t left[];
 const uint8_t right[];
-
+const uint8_t start_screen[];
+const uint8_t end[];
 // BOOLEAN FLAGS FOR ARROW DRAWING
 bool drawLeft = false;
 bool drawRight = false;
@@ -188,7 +190,6 @@ int main(void)
   // volatile int *HPS_GPIO1_ptr = (int *)HPS_GPIO1_BASE; // GPIO1 base address
   // volatile int HPS_timer_LEDG = 0x01000000;            // value to turn on the HPS green light LEDG
 
-  disable_A9_interrupts(); // disable interrupts
   set_A9_IRQ_stack(); // initialize the stack pointer for IRQ mode
   config_GIC();       // configure the general interrupt controller
   // config_HPS_timer(); // configure the HPS timer
@@ -222,7 +223,7 @@ int main(void)
   //Start screen
   bool readyToStart = false;
   bool gameStart = false;
-  draw_full_screen(startScreen);
+  draw_full_screen(start_screen);
   wait_for_vsync();
   pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
 
