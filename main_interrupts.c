@@ -13,86 +13,84 @@ volatile int key_dir = 0;
 volatile int pattern = 0x0F0F0F0F; // pattern for LED lights
 
 /* This files provides address values that exist in the system */
-#define BOARD                 "DE1-SoC"
-#define INT_ENABLE            0x40
-#define INT_DISABLE           0xC0
-#define SVC_MODE              0x13
-#define IRQ_MODE              0x12
-#define ENABLE                0x1
-#define EDGE_TRIGGERED        0x1
-#define LEVEL_SENSITIVE       0x0
-#define CPU0                  0x01
-
+#define BOARD "DE1-SoC"
+#define INT_ENABLE 0x40
+#define INT_DISABLE 0xC0
+#define SVC_MODE 0x13
+#define IRQ_MODE 0x12
+#define ENABLE 0x1
+#define EDGE_TRIGGERED 0x1
+#define LEVEL_SENSITIVE 0x0
+#define CPU0 0x01
 
 /* Memory */
-#define DDR_BASE              0x00000000
-#define DDR_END               0x3FFFFFFF
-#define A9_ONCHIP_BASE        0xFFFF0000
-#define A9_ONCHIP_END         0xFFFFFFFF
-#define SDRAM_BASE            0xC0000000
-#define SDRAM_END             0xC3FFFFFF
-#define FPGA_ONCHIP_BASE      0xC8000000
-#define FPGA_ONCHIP_END       0xC803FFFF
-#define FPGA_CHAR_BASE        0xC9000000
-#define FPGA_CHAR_END         0xC9001FFF
+#define DDR_BASE 0x00000000
+#define DDR_END 0x3FFFFFFF
+#define A9_ONCHIP_BASE 0xFFFF0000
+#define A9_ONCHIP_END 0xFFFFFFFF
+#define SDRAM_BASE 0xC0000000
+#define SDRAM_END 0xC3FFFFFF
+#define FPGA_ONCHIP_BASE 0xC8000000
+#define FPGA_ONCHIP_END 0xC803FFFF
+#define FPGA_CHAR_BASE 0xC9000000
+#define FPGA_CHAR_END 0xC9001FFF
 
 /* Cyclone V FPGA devices */
-#define LEDR_BASE             0xFF200000
-#define HEX3_HEX0_BASE        0xFF200020
-#define HEX5_HEX4_BASE        0xFF200030
-#define SW_BASE               0xFF200040
-#define KEY_BASE              0xFF200050
-#define JP1_BASE              0xFF200060
-#define JP2_BASE              0xFF200070
-#define PS2_BASE              0xFF200100
-#define PS2_DUAL_BASE         0xFF200108
-#define JTAG_UART_BASE        0xFF201000
-#define JTAG_UART_2_BASE      0xFF201008
-#define IrDA_BASE             0xFF201020
-#define TIMER_BASE            0xFF202000
-#define AV_CONFIG_BASE        0xFF203000
-#define PIXEL_BUF_CTRL_BASE   0xFF203020
-#define CHAR_BUF_CTRL_BASE    0xFF203030
-#define AUDIO_BASE            0xFF203040
-#define VIDEO_IN_BASE         0xFF203060
-#define ADC_BASE              0xFF204000
+#define LEDR_BASE 0xFF200000
+#define HEX3_HEX0_BASE 0xFF200020
+#define HEX5_HEX4_BASE 0xFF200030
+#define SW_BASE 0xFF200040
+#define KEY_BASE 0xFF200050
+#define JP1_BASE 0xFF200060
+#define JP2_BASE 0xFF200070
+#define PS2_BASE 0xFF200100
+#define PS2_DUAL_BASE 0xFF200108
+#define JTAG_UART_BASE 0xFF201000
+#define JTAG_UART_2_BASE 0xFF201008
+#define IrDA_BASE 0xFF201020
+#define TIMER_BASE 0xFF202000
+#define AV_CONFIG_BASE 0xFF203000
+#define PIXEL_BUF_CTRL_BASE 0xFF203020
+#define CHAR_BUF_CTRL_BASE 0xFF203030
+#define AUDIO_BASE 0xFF203040
+#define VIDEO_IN_BASE 0xFF203060
+#define ADC_BASE 0xFF204000
 
 /* Cyclone V HPS devices */
-#define HPS_GPIO1_BASE        0xFF709000
-#define HPS_TIMER0_BASE       0xFFC08000
-#define HPS_TIMER1_BASE       0xFFC09000
-#define HPS_TIMER2_BASE       0xFFD00000
-#define HPS_TIMER3_BASE       0xFFD01000
-#define FPGA_BRIDGE           0xFFD0501C
+#define HPS_GPIO1_BASE 0xFF709000
+#define HPS_TIMER0_BASE 0xFFC08000
+#define HPS_TIMER1_BASE 0xFFC09000
+#define HPS_TIMER2_BASE 0xFFD00000
+#define HPS_TIMER3_BASE 0xFFD01000
+#define FPGA_BRIDGE 0xFFD0501C
 
 /* ARM A9 MPCORE devices */
-#define   PERIPH_BASE         0xFFFEC000    // base address of peripheral devices
-#define   MPCORE_PRIV_TIMER   0xFFFEC600    // PERIPH_BASE + 0x0600
+#define PERIPH_BASE 0xFFFEC000       // base address of peripheral devices
+#define MPCORE_PRIV_TIMER 0xFFFEC600 // PERIPH_BASE + 0x0600
 
 /* Interrupt controller (GIC) CPU interface(s) */
-#define MPCORE_GIC_CPUIF      0xFFFEC100    // PERIPH_BASE + 0x100
-#define ICCICR                0x00          // offset to CPU interface control reg
-#define ICCPMR                0x04          // offset to interrupt priority mask reg
-#define ICCIAR                0x0C          // offset to interrupt acknowledge reg
-#define ICCEOIR               0x10          // offset to end of interrupt reg
+#define MPCORE_GIC_CPUIF 0xFFFEC100 // PERIPH_BASE + 0x100
+#define ICCICR 0x00                 // offset to CPU interface control reg
+#define ICCPMR 0x04                 // offset to interrupt priority mask reg
+#define ICCIAR 0x0C                 // offset to interrupt acknowledge reg
+#define ICCEOIR 0x10                // offset to end of interrupt reg
 /* Interrupt controller (GIC) distributor interface(s) */
-#define MPCORE_GIC_DIST       0xFFFED000    // PERIPH_BASE + 0x1000
-#define ICDDCR                0x00          // offset to distributor control reg
-#define ICDISER               0x100         // offset to interrupt set-enable regs
-#define ICDICER               0x180         // offset to interrupt clear-enable regs
-#define ICDIPTR               0x800         // offset to interrupt processor targets regs
-#define ICDICFR               0xC00         // offset to interrupt configuration regs
+#define MPCORE_GIC_DIST 0xFFFED000 // PERIPH_BASE + 0x1000
+#define ICDDCR 0x00                // offset to distributor control reg
+#define ICDISER 0x100              // offset to interrupt set-enable regs
+#define ICDICER 0x180              // offset to interrupt clear-enable regs
+#define ICDIPTR 0x800              // offset to interrupt processor targets regs
+#define ICDICFR 0xC00              // offset to interrupt configuration regs
 
 /* Exception Codes */
-#define	INTERVAL_TIMER_IRQ				72
-#define	KEYS_IRQ		 						73
-#define	FPGA_IRQ2	 						74
-#define	FPGA_IRQ3	 						75
-#define	FPGA_IRQ4	 						76
-#define	FPGA_IRQ5	 						77
-#define	AUDIO_IRQ							78
-#define	PS2_IRQ		 						79
-
+#define INTERVAL_TIMER_IRQ 72
+#define KEYS_IRQ 73
+#define FPGA_IRQ2 74
+#define FPGA_IRQ3 75
+#define FPGA_IRQ4 76
+#define FPGA_IRQ5 77
+#define AUDIO_IRQ 78
+#define PS2_IRQ 79
 
 // VGA COLORS
 #define WHITE 0xFFFF
@@ -106,11 +104,10 @@ volatile int pattern = 0x0F0F0F0F; // pattern for LED lights
 #define PINK 0xFC18
 #define ORANGE 0xFC00
 
-
 // VGA BUFFER VARS
 volatile int pixel_buffer_start;
 
-volatile int* HEX3_0_BASE_ptr = (int*)HEX3_HEX0_BASE;
+volatile int *HEX3_0_BASE_ptr = (int *)HEX3_HEX0_BASE;
 
 // SCREEN SIZE
 #define RESOLUTION_X 320
@@ -140,7 +137,6 @@ const uint8_t mission_screen[];
 const uint8_t end[];
 
 // BOOLEAN FLAGS FOR ARROW DRAWING
-bool drawLeft = false;
 bool drawEggman = false;
 bool drawCapshield = false;
 bool drawThorhammer = false;
@@ -151,11 +147,11 @@ int x_coor_cap = 0;
 int x_coor_thor = 0;
 int x_coor_egg = 0;
 
-//Score tracking variable
+// Score tracking variable
 unsigned int score = 0;
 
-//Game countdown variable
-int countdown = 40;
+// Game countdown variable
+int countdown = 160;
 int countdown_length = 320;
 int short countdown_colour = 0x0FF0;
 
@@ -165,7 +161,7 @@ void draw_player(const unsigned int y_coor);
 void draw_eggman(const unsigned int x_coor);
 void draw_capshield(const unsigned int x_coor);
 void draw_thorhammer(const unsigned int x_coor);
-void chooseArrow();
+void randomEnemy();
 void draw_countdown(int x, short int colour);
 // CONFIGURE INTERRUPTS
 void PS2_ISR(void);
@@ -187,158 +183,166 @@ unsigned char byte1 = 0;
 unsigned char byte2 = 0;
 unsigned char byte3 = 0;
 
-   bool readyToStartGame = false;
+bool readyToStartGame = false;
+bool restartGame = false;
+
+bool move_up;
+bool move_down;
+
 int main(void)
 {
   set_A9_IRQ_stack();
-    config_GIC();
-    config_KEYs();
-    config_PS2();
-    enable_A9_interrupts();
-	
-	
-volatile int *pixel_ctrl_ptr = (int *)PIXEL_BUF_CTRL_BASE;
+  config_GIC();
+  config_KEYs();
+  config_PS2();
+  enable_A9_interrupts();
+
+  volatile int *pixel_ctrl_ptr = (int *)PIXEL_BUF_CTRL_BASE;
   volatile int *PS2_ptr = (int *)PS2_BASE;
 
-
-  //--------------------------------------------------------------------
-
-  /* set front pixel buffer to start of FPGA On-chip memory */
-  *(pixel_ctrl_ptr + 1) = FPGA_ONCHIP_BASE; // first store the address in the
-                                            // back buffer
-  /* now, swap the front/back buffers, to set the front buffer location */
-  wait_for_vsync();
-  /* initialize a pointer to the pixel buffer, used by drawing functions */
-  pixel_buffer_start = *pixel_ctrl_ptr;
-
-  clear_screen(); // pixel_buffer_start points to the pixel buffer
-  /* set back pixel buffer to start of SDRAM memory */
-  *(pixel_ctrl_ptr + 1) = SDRAM_BASE;
-  pixel_buffer_start = *(pixel_ctrl_ptr + 1); // we draw on the back buffer
-
-  //Start screen
-   bool readyToStart = false;
-   bool gameStart = false;
-   bool playerReady = false;  
-   draw_full_screen(start_screen);
-   wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
-   pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
-
-   while(1)
-   {
-	printf("while1\n");
-     if(readyToStartGame == true) {
-		printf("readytoStartTrue this should work\n");
-	 	break;
-	 }
-	    
-   }
-	
-	printf("Here are the mission details. \n"); 
-	draw_full_screen(mission_screen);
-	wait_for_vsync();  
-	pixel_buffer_start = *(pixel_ctrl_ptr + 1);
-  readyToStartGame = false;
-	while(1){
-			printf("while2\n");
-	      if(readyToStartGame == true) {
-	 	break;
-	 }
-	}
-	
-   printf("Game started!\n");
-
-
-clear_screen();
-// count time steps to space out arrow appearances
-  uint8_t count = 0;
-  while (countdown > 0)
+  // MAIN GAME LOOP --------------------------------------------------------------------
+  while (1)
   {
-    if (count % 2 == 0)
-    {
-      srand(time(NULL)); // seed rand using current system time for better variability
-      chooseArrow();
-    }
-    count++;
 
-    // draw background
-    draw_full_screen(bg_map);
-	// draw countdown for game
-	draw_countdown(countdown_length, countdown_colour);
+    /* set front pixel buffer to start of FPGA On-chip memory */
+    *(pixel_ctrl_ptr + 1) = FPGA_ONCHIP_BASE; // first store the address in the
+                                              // back buffer
+    /* now, swap the front/back buffers, to set the front buffer location */
+    wait_for_vsync();
+    /* initialize a pointer to the pixel buffer, used by drawing functions */
+    pixel_buffer_start = *pixel_ctrl_ptr;
 
-// If the arrows have gone past the background outlines, reset position to top of the screen, and turn off that arrow
+    clear_screen(); // pixel_buffer_start points to the pixel buffer
+    /* set back pixel buffer to start of SDRAM memory */
+    *(pixel_ctrl_ptr + 1) = SDRAM_BASE;
+    pixel_buffer_start = *(pixel_ctrl_ptr + 1); // we draw on the back buffer
 
-    if (y_coor_l >= 127)
-    {
-      y_coor_l = 0;
-      drawLeft = false; 
-    } 
-	  
-	 
-    if (x_coor_cap <= 0)
-    {
-      x_coor_cap = 320;
-      drawCapshield = false;
-    }
-    if (x_coor_thor <= 0)
-    {
-      x_coor_thor = 320;
-      drawThorhammer = false;
-    }
-    if (x_coor_egg <= 0)
-    {
-      x_coor_egg = 320;
-      drawEggman = false;
-    }
-
-    // If an arrow's boolean flag is set, draw this arrow
-    if (drawLeft)
-    {
-      draw_player(y_coor_l);
-      y_coor_l += 24;
-    }
-    if (drawCapshield)
-    {
-      draw_capshield(x_coor_cap);
-      x_coor_cap -= 24;
-    }
-    if (drawThorhammer)
-    {
-      draw_thorhammer(x_coor_thor);
-      x_coor_thor -= 24;
-    }
-    if (drawEggman)
-    {
-      draw_eggman(x_coor_egg);
-      x_coor_egg -= 24;
-    }
-
-
-
-
-
+    // Start screen
+    bool readyToStart = false;
+    bool gameStart = false;
+    
+    bool playerReady = false;
+    draw_full_screen(start_screen);
     wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
     pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
 
-	  //Countdown Game Timer
-    if(countdown < 15)
+    while (1)
     {
+      printf("startGame keyRead\n");
+      if (readyToStartGame == true)
+      {
+        break;
+      }
+    }
+
+    draw_full_screen(mission_screen);
+    
+    wait_for_vsync();
+    pixel_buffer_start = *(pixel_ctrl_ptr + 1);
+
+    readyToStartGame = false;
+    while (1)
+    {
+      printf("missionScreen keyRead\n");
+      if (readyToStartGame == true)
+      {
+        break;
+      }
+    }
+
+    printf("Game started!\n");
+
+    clear_screen();
+    // count time steps to space out arrow appearances
+    uint8_t count = 0;
+    while (countdown > 0)
+    {
+      if (count % 2 == 0)
+      {
+        srand(time(NULL)); // seed rand using current system time for better variability
+        randomEnemy();
+      }
+      count++;
+
+      // draw background
+      draw_full_screen(bg_map);
+      // draw countdown for game
+      draw_countdown(countdown_length, countdown_colour);
+
+      // If the arrows have gone past the background outlines, reset position to top of the screen, and turn off that arrow
+		
+      if (x_coor_cap <= 0)
+      {
+        x_coor_cap = 320;
+        drawCapshield = false;
+      }
+      if (x_coor_thor <= 0)
+      {
+        x_coor_thor = 320;
+        drawThorhammer = false;
+      }
+      if (x_coor_egg <= 0)
+      {
+        x_coor_egg = 320;
+        drawEggman = false;
+      }
+
+      // If an arrow's boolean flag is set, draw this arrow
+        draw_player(y_coor_l);
+        if(move_up) {
+			if(y_coor_l >= 24) {
+				y_coor_l -= 24;
+			}
+			move_down = true;
+		} else if(move_down) {
+			if(y_coor_l <= 215) {
+				y_coor_l += 24;
+			}
+			move_down = false;
+		}
+		
+      if (drawCapshield)
+      {
+        draw_capshield(x_coor_cap);
+        x_coor_cap -= 24;
+      }
+      if (drawThorhammer)
+      {
+        draw_thorhammer(x_coor_thor);
+        x_coor_thor -= 24;
+      }
+      if (drawEggman)
+      {
+        draw_eggman(x_coor_egg);
+        x_coor_egg -= 24;
+      }
+
+      wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
+      pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
+
+      // Countdown Game Timer
+      if (countdown < 15)
+      {
         countdown_colour = 0xFF00;
-    }
-    if(countdown < 5 )
-    {
+      }
+      if (countdown < 5)
+      {
         countdown_colour = 0xF000;
+      }
+      countdown = countdown - 1;
+      countdown_length = countdown_length - (countdown_length / countdown);
     }
-    countdown = countdown - 1;
-    countdown_length = countdown_length - (countdown_length / countdown);
 
-  }
-
-
-  // game over
-  draw_full_screen(end);
-wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
+    // game over
+    draw_full_screen(end);
+    wait_for_vsync();                           // swap front and back buffers on VGA vertical sync
     pixel_buffer_start = *(pixel_ctrl_ptr + 1); // new back buffer
+
+    while (!restartGame)
+    {
+      printf("while3\n");
+    }
+  }
 }
 
 //=============================================================================
@@ -346,64 +350,76 @@ wait_for_vsync();                           // swap front and back buffers on VG
 //=============================================================================
 void plot_pixel(int x, int y, short int line_color)
 {
-    *(short int *)(pixel_buffer_start + (y << 10) + (x << 1)) = line_color;
+  *(short int *)(pixel_buffer_start + (y << 10) + (x << 1)) = line_color;
 }
 
-void clear_screen() {
-	int i;
-    for(i = 0; i < RESOLUTION_X; i++) {
-		int j;
-        for(j = 0; j < RESOLUTION_Y; j++) {
-            plot_pixel(i, j, 0x0000);
-        }
+void clear_screen()
+{
+  int i;
+  for (i = 0; i < RESOLUTION_X; i++)
+  {
+    int j;
+    for (j = 0; j < RESOLUTION_Y; j++)
+    {
+      plot_pixel(i, j, 0x0000);
     }
+  }
 }
 
-void swap (int *x, int *y) {
-	int temp = *x;
-	*x = *y;
-	*y = temp;
+void swap(int *x, int *y)
+{
+  int temp = *x;
+  *x = *y;
+  *y = temp;
 }
 
-void draw_line(int x0, int y0, int x1, int y1, short int color) {
+void draw_line(int x0, int y0, int x1, int y1, short int color)
+{
 
-    bool is_steep = ABS(y1 - y0) > ABS(x1 - x0);
+  bool is_steep = ABS(y1 - y0) > ABS(x1 - x0);
 
-    if (is_steep)  {
-        swap(&x0, &y0);
-        swap(&x1, &y1);
+  if (is_steep)
+  {
+    swap(&x0, &y0);
+    swap(&x1, &y1);
+  }
+
+  if (x0 > x1)
+  {
+    swap(&x0, &x1);
+    swap(&y0, &y1);
+  }
+
+  int err = -((x1 - x0) / 2);
+  int y = y0;
+  int y_step = -1;
+
+  if (y0 < y1)
+  {
+    y_step = 1;
+  }
+
+  int x;
+
+  for (x = x0; x <= x1; x++)
+  {
+    if (is_steep)
+    {
+      plot_pixel(y, x, color);
+    }
+    else
+    {
+      plot_pixel(x, y, color);
     }
 
-    if (x0 > x1) {
-        swap(&x0, &x1);
-        swap(&y0, &y1);
+    err += ABS(y1 - y0);
+
+    if (err >= 0)
+    {
+      y += y_step;
+      err -= (x1 - x0);
     }
-
-    int err = -((x1 - x0) / 2);
-    int y = y0;
-    int y_step = -1;
-
-    if (y0 < y1) {
-        y_step = 1;
-    }
-
-    int x;
-
-    for (x = x0; x <= x1; x++) {
-        if (is_steep) {
-            plot_pixel(y, x, color);
-        }
-        else {
-            plot_pixel(x, y, color);
-        }
-
-        err += ABS(y1 - y0);
-
-        if (err >= 0) {
-            y += y_step;
-            err -= (x1 - x0);
-        }
-    }
+  }
 }
 
 void wait_for_vsync()
@@ -413,10 +429,10 @@ void wait_for_vsync()
 
   *pixel_ctrl_ptr = 1; // start the synchronization process
 
-  do {
+  do
+  {
     status = *(pixel_ctrl_ptr + 3);
   } while ((status & 0x01) != 0);
-
 }
 
 //=============================================================================
@@ -436,7 +452,7 @@ void draw_full_screen(const uint8_t bg_map[])
     int blue = (bg_map[k] & 0x1f);
 
     short int p = red | ((green << 5) | blue);
-	
+
     plot_pixel(i, j, p);
 
     i++;
@@ -557,16 +573,12 @@ void draw_thorhammer(const unsigned int x_coor)
   }
 }
 
-void chooseArrow()
+void randomEnemy()
 {
-  //produce a random number between 0 and 3 to choose which arrow to draw
+  // produce a random number between 0 and 3 to choose which arrow to draw
   int whichArrow = rand() % 4;
   switch (whichArrow)
   {
-  case 0:
-    drawLeft = true;
-    break;
-
   case 1:
     drawCapshield = true;
     break;
@@ -586,56 +598,35 @@ void chooseArrow()
 
 void draw_countdown(int x, short int colour)
 {
-	//in-game countdown
-	//thickness of line
-	int width;
-	for(width = 239; width > 233 ; --width) {
-		draw_line(0, width, x, width, colour);
-	}
+  // in-game countdown
+  // thickness of line
+  int width;
+  for (width = 239; width > 233; --width)
+  {
+    draw_line(0, width, x, width, colour);
+  }
 }
-
 
 //=============================================================================
 // I/O HELPERS
 //=============================================================================
-int arrow_key(char b1, char b2, char b3) {
-	unsigned int makeCode[] = {0, 0, 0, 0, 0, 0, 0, 0};
-	unsigned int shift_buffer;
-	int i;
 
-	shift_buffer = (b1 << 16) | (b2 << 8) | b3;
-	for (i = 0; i < 6; i++) {
-		makeCode[i] = shift_buffer & 0x0000000F; // character is in rightmost index
-		shift_buffer = shift_buffer >> 4;
-	}
+void display_hex(int i)
+{
+  printf("displaying hex\n");
+  // seg 7 code from 0 to 9
+  // one char is one byte
+  char seg7[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x67};
 
-	//KEY MAPPINGS
-	if(makeCode[5] == 14 && makeCode[4] == 0 && makeCode[3] == 7 && makeCode[2] == 2) // Down Arrow
-		return 1;
-	else if(makeCode[5] == 14 && makeCode[4] == 0 && makeCode[3] == 7 && makeCode[2] == 5) // Up Arrow
-		return 2;
-	else if(makeCode[5] == 14 && makeCode[4] == 0 && makeCode[3] == 6 && makeCode[2] == 11) // Left Arrow
-		return 3;
-	else if(makeCode[5] == 14 && makeCode[4] == 0 && makeCode[3] == 7 && makeCode[2] == 4) // Right Arrow
-		return 4;
-	else return 0;
+  if (i >= 10)
+  {
+    *HEX3_0_BASE_ptr = (seg7[i / 10] << 8 | seg7[i % 10]);
+  }
+  else
+  {
+    *HEX3_0_BASE_ptr = seg7[i];
+  }
 }
-
-void display_hex(int i){
-	printf("displaying hex\n");
-	//seg 7 code from 0 to 9
-	//one char is one byte
-	char seg7[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x67};
-
-	if(i >= 10){
-		*HEX3_0_BASE_ptr = (seg7[i/10]<<8 | seg7[i%10]);
-	}else{
-		*HEX3_0_BASE_ptr = seg7[i];
-	}
-}
-
-
-
 
 //=============================================================================
 // INTERRUPTS, AND ARM STUFF
@@ -654,8 +645,8 @@ void config_HPS_timer()
 }
 
 /* setup HPS GPIO1. The GPIO1 port has one green light (LEDG) and one pushbutton
-* KEY connected for the DE1-SoC Computer. The KEY is connected to GPIO1[25],
-* and is not used here. The green LED is connected to GPIO1[24]. */
+ * KEY connected for the DE1-SoC Computer. The KEY is connected to GPIO1[25],
+ * and is not used here. The green LED is connected to GPIO1[24]. */
 void config_HPS_GPIO1()
 {
   volatile int *HPS_GPIO1_ptr = (int *)HPS_GPIO1_BASE; // GPIO1 base address
@@ -686,112 +677,120 @@ void config_KEYs()
   *(KEY_ptr + 2) = 0x3;                    // enable interrupts for KEY[1]
 }
 
-void config_PS2() {
-	volatile int * PS2_ptr = (int *) 0xFF200100; // PS/2 base address
-
-	*(PS2_ptr + 1) = 0x00000001; // set RE to 1 to enable interrupts
+void config_PS2()
+{
+  volatile int *PS2_ptr = (int *)0xFF200100; // PS/2 base address
+//  *(PS2_ptr) = 0xFF; /* reset */
+  *(PS2_ptr + 1) = 0x00000001; // set RE to 1 to enable interrupts
 }
 
-
 /*
-* Initialize the banked stack pointer register for IRQ mode
-*/
+ * Initialize the banked stack pointer register for IRQ mode
+ */
 void set_A9_IRQ_stack(void)
 {
-    int stack, mode;
-    stack = A9_ONCHIP_END - 7;		// top of A9 onchip memory, aligned to 8 bytes
-    /* change processor to IRQ mode with interrupts disabled */
-    mode = INT_DISABLE | IRQ_MODE;
-    asm("msr cpsr, %[ps]" : : [ps] "r" (mode));
-    /* set banked stack pointer */
-    asm("mov sp, %[ps]" : : [ps] "r" (stack));
+  int stack, mode;
+  stack = A9_ONCHIP_END - 7; // top of A9 onchip memory, aligned to 8 bytes
+  /* change processor to IRQ mode with interrupts disabled */
+  mode = INT_DISABLE | IRQ_MODE;
+  asm("msr cpsr, %[ps]"
+      :
+      : [ps] "r"(mode));
+  /* set banked stack pointer */
+  asm("mov sp, %[ps]"
+      :
+      : [ps] "r"(stack));
 
-    /* go back to SVC mode before executing subroutine return! */
-    mode = INT_DISABLE | SVC_MODE;
-    asm("msr cpsr, %[ps]" : : [ps] "r" (mode));
-
+  /* go back to SVC mode before executing subroutine return! */
+  mode = INT_DISABLE | SVC_MODE;
+  asm("msr cpsr, %[ps]"
+      :
+      : [ps] "r"(mode));
 }
 
 /*
  * Turn on interrupts in the ARM processor
-*/
+ */
 void enable_A9_interrupts(void)
 {
-    int status = SVC_MODE | INT_ENABLE;
-    asm("msr cpsr,%[ps]" : : [ps]"r"(status));
+  int status = SVC_MODE | INT_ENABLE;
+  asm("msr cpsr,%[ps]"
+      :
+      : [ps] "r"(status));
 }
 
 void disable_A9_interrupts(void)
 {
-    int status = SVC_MODE | INT_DISABLE;
-    asm("msr cpsr,%[ps]" : : [ps]"r"(status));
+  int status = SVC_MODE | INT_DISABLE;
+  asm("msr cpsr,%[ps]"
+      :
+      : [ps] "r"(status));
 }
 /*
-* Configure the Generic Interrupt Controller (GIC)
-*/
+ * Configure the Generic Interrupt Controller (GIC)
+ */
 void config_GIC(void)
 {
-    int address;	// used to calculate register addresses
-    
-    /* configure the HPS timer interrupt */
-    *((int *)0xFFFED8C4) = 0x01000000; 
-    *((int *)0xFFFED118) = 0x00000080;
-    
-    /* configure the FPGA interval timer and KEYs, and PS2 keyboard interrupts */
-   	config_interrupt (PS2_IRQ, CPU0);
-	config_interrupt (KEYS_IRQ, CPU0);
-    config_interrupt (INTERVAL_TIMER_IRQ, CPU0);
-    
-    // Set Interrupt Priority Mask Register (ICCPMR). Enable interrupts for lowest priority
-    address = MPCORE_GIC_CPUIF + ICCPMR;
-    *((int *) address) = 0xFFFF;
+  int address; // used to calculate register addresses
 
-    // Set CPU Interface Control Register (ICCICR). Enable signaling of interrupts
-    address = MPCORE_GIC_CPUIF + ICCICR;
-    *((int *) address) = ENABLE;
+  /* configure the HPS timer interrupt */
+  *((int *)0xFFFED8C4) = 0x01000000;
+  *((int *)0xFFFED118) = 0x00000080;
 
-    // Configure the Distributor Control Register (ICDDCR) to send pending interrupts to CPUs
-    address = MPCORE_GIC_DIST + ICDDCR;
-    *((int *) address) = ENABLE;
-	
+  /* configure the FPGA interval timer and KEYs, and PS2 keyboard interrupts */
+  config_interrupt(PS2_IRQ, CPU0);
+  config_interrupt(KEYS_IRQ, CPU0);
+  config_interrupt(INTERVAL_TIMER_IRQ, CPU0);
+
+  // Set Interrupt Priority Mask Register (ICCPMR). Enable interrupts for lowest priority
+  address = MPCORE_GIC_CPUIF + ICCPMR;
+  *((int *)address) = 0xFFFF;
+
+  // Set CPU Interface Control Register (ICCICR). Enable signaling of interrupts
+  address = MPCORE_GIC_CPUIF + ICCICR;
+  *((int *)address) = ENABLE;
+
+  // Configure the Distributor Control Register (ICDDCR) to send pending interrupts to CPUs
+  address = MPCORE_GIC_DIST + ICDDCR;
+  *((int *)address) = ENABLE;
 }
 
 /*
  * Configure registers in the GIC for individual interrupt IDs.
-*/
-void config_interrupt (int int_ID, int CPU_target)
+ */
+void config_interrupt(int int_ID, int CPU_target)
 {
-    int n, addr_offset, value, address;
-    /* Set Interrupt Processor Targets Register (ICDIPTRn) to cpu0.
-     * n = integer_div(int_ID / 4) * 4
-     * addr_offet = #ICDIPTR + n
-     * value = CPU_target << ((int_ID & 0x3) * 8)
-     */
-    n = (int_ID >> 2) << 2;
-    addr_offset = ICDIPTR + n;
-    value = CPU_target << ((int_ID & 0x3) << 3);
+  int n, addr_offset, value, address;
+  /* Set Interrupt Processor Targets Register (ICDIPTRn) to cpu0.
+   * n = integer_div(int_ID / 4) * 4
+   * addr_offet = #ICDIPTR + n
+   * value = CPU_target << ((int_ID & 0x3) * 8)
+   */
+  n = (int_ID >> 2) << 2;
+  addr_offset = ICDIPTR + n;
+  value = CPU_target << ((int_ID & 0x3) << 3);
 
-    /* Now that we know the register address and value, we need to set the correct bits in
-     * the GIC register, without changing the other bits */
-    address = MPCORE_GIC_DIST + addr_offset;
-    hw_write_bits((int *) address, 0xff << ((int_ID & 0x3) << 3), value);
+  /* Now that we know the register address and value, we need to set the correct bits in
+   * the GIC register, without changing the other bits */
+  address = MPCORE_GIC_DIST + addr_offset;
+  hw_write_bits((int *)address, 0xff << ((int_ID & 0x3) << 3), value);
 
-    /* Set Interrupt Set-Enable Registers (ICDISERn).
-     * n = (integer_div(in_ID / 32) * 4
-     * addr_offset = 0x100 + n
-     * value = enable << (int_ID & 0x1F) */
-    n = (int_ID >> 5) << 2;
-    addr_offset = ICDISER + n;
-    value = 0x1 << (int_ID & 0x1f);
-    /* Now that we know the register address and value, we need to set the correct bits in
-     * the GIC register, without changing the other bits */
-    address = MPCORE_GIC_DIST + addr_offset;
-    hw_write_bits((int *) address, 0x1 << (int_ID & 0x1f), value);
+  /* Set Interrupt Set-Enable Registers (ICDISERn).
+   * n = (integer_div(in_ID / 32) * 4
+   * addr_offset = 0x100 + n
+   * value = enable << (int_ID & 0x1F) */
+  n = (int_ID >> 5) << 2;
+  addr_offset = ICDISER + n;
+  value = 0x1 << (int_ID & 0x1f);
+  /* Now that we know the register address and value, we need to set the correct bits in
+   * the GIC register, without changing the other bits */
+  address = MPCORE_GIC_DIST + addr_offset;
+  hw_write_bits((int *)address, 0x1 << (int_ID & 0x1f), value);
 }
 
-void hw_write_bits(volatile int * addr, volatile int unmask, volatile int value)
+void hw_write_bits(volatile int *addr, volatile int unmask, volatile int value)
 {
-    *addr = ((~unmask) & *addr) | value;
+  *addr = ((~unmask) & *addr) | value;
 }
 
 void __attribute__((interrupt)) __cs3_isr_irq(void)
@@ -800,70 +799,90 @@ void __attribute__((interrupt)) __cs3_isr_irq(void)
   // Read the ICCIAR from the processor interface
   int int_ID = *((int *)0xFFFEC10C);
   printf("%d\n", int_ID);
-  
+
   if (int_ID == PS2_IRQ) // check if interrupt is from the PS2
   {
-	  printf("ps2\n");
-      PS2_ISR();
-  } else if (int_ID == KEYS_IRQ) { // key interrupt
-	  printf("key\n");
-	  KEY_ISR();
+    printf("ps2\n");
+    PS2_ISR();
   }
-  else {
-	  printf("else\n");
+  else if (int_ID == KEYS_IRQ)
+  { // key interrupt
+    printf("key\n");
+    KEY_ISR();
+  }
+  else
+  {
+    printf("else\n");
     while (1)
       ; // if unexpected, then stay here
-  } 
+  }
 
   // Write to the End of Interrupt Register (ICCEOIR)
   *((int *)0xFFFEC110) = int_ID;
-	return;
+  return;
 }
 
 // Define the remaining exception handlers
-void __attribute__((interrupt)) __cs3_reset(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_reset(void)
+{
+  while (1)
+    ;
 }
 
-void __attribute__((interrupt)) __cs3_isr_undef(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_isr_undef(void)
+{
+  while (1)
+    ;
 }
 
-void __attribute__((interrupt)) __cs3_isr_swi(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_isr_swi(void)
+{
+  while (1)
+    ;
 }
 
-void __attribute__((interrupt)) __cs3_isr_pabort(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_isr_pabort(void)
+{
+  while (1)
+    ;
 }
 
-void __attribute__((interrupt)) __cs3_isr_dabort(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_isr_dabort(void)
+{
+  while (1)
+    ;
 }
 
-void __attribute__((interrupt)) __cs3_isr_fiq(void) {
-	while (1);
+void __attribute__((interrupt)) __cs3_isr_fiq(void)
+{
+  while (1)
+    ;
 }
 
 // KEY Exception Handler
-void KEY_ISR(void) {
-	volatile int *KEY_ptr = (int *) KEY_BASE;
-    int press;
-    press = *(KEY_ptr + 3); // read the pushbutton edgecapture register
-	
-	// KEY1
-	if (press == 2) {
-		readyToStartGame = true;
-	}
-	
-    *(KEY_ptr + 3) = press; // Clear the interrupt
-    key_dir ^= 1; // Toggle key_dir value
-	
-    return;
-	
+void KEY_ISR(void)
+{
+  volatile int *KEY_ptr = (int *)KEY_BASE;
+  int press;
+  press = *(KEY_ptr + 3); // read the pushbutton edgecapture register
+printf("%d\n", press);
+  // KEY1
+  if (press == 2)
+  {
+    readyToStartGame = true;
+  }
+
+  // KEY2
+  if (press == 3)
+  {
+    restartGame = true;
+  }
+
+  *(KEY_ptr + 3) = press; // Clear the interrupt
+  key_dir ^= 1;           // Toggle key_dir value
+
+  return;
 }
-
-
 void PS2_ISR( void )
 {
   	volatile int * PS2_ptr = (int *) 0xFF200100;		// PS/2 port address
@@ -873,49 +892,27 @@ void PS2_ISR( void )
 	while (1)
 	{
     	PS2_data = *PS2_ptr;          // read the Data register in the PS/2 port
-   		RVALID = (PS2_data & 0x8000); // extract the RVALID field
-    	if (RVALID != 0)
-    	{
-      		/* always save the last three bytes received */
-      		byte1 = byte2;
-      		byte2 = byte3;
-      		byte3 = PS2_data & 0xFF;
-    	}
-    	if ((byte2 == (char)0xAA) && (byte3 == (char)0x00))
-      	*(PS2_ptr) = 0xF4;
-
-		if ((arrow_key(byte1, byte2, byte3) == 1))
+   		
+		
+		if (PS2_data == 114)
 		{ //Down arrow
 		  score++;
 		  display_hex(score);
 		  printf("down\n");
+			move_down = true;
 		  return;
 		}
-		if ((arrow_key(byte1, byte2, byte3) == 2))
+		if (PS2_data == 117)
 		{ //Up arrow
-		  score++;
+		  	move_up = true;
+			score++;
 		  display_hex(score);
 		  printf("up\n");
       	  return;
 		}
-		if ((arrow_key(byte1, byte2, byte3) == 3))
-		{ //Left arrow
-		  score++;
-		  display_hex(score);
-		  printf("left\n");
-		  return;
-		}
-		if ((arrow_key(byte1, byte2, byte3) == 4))
-		{ //Right arrow
-		  score++;
-		  display_hex(score);
-		  printf("right\n");
-		  return;
-		}
 		
   }
 }
-
 
 //=============================================================================
 // IMAGE ARRAYS
@@ -2116,4 +2113,6 @@ const uint8_t end[] = {
   0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x0b, 0x74, 0x03, 0x74, 0x03, 0x94, 0x03, 0x93, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x93, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x94, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 
   0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x54, 0x0b, 0x54, 0x0b, 0x54, 0x0b, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x54, 0x0b, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x93, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x93, 0x03, 0x93, 0x03, 0x73, 0x03, 0x73, 0x03, 0x74, 0x03, 0x74, 0x03, 0x94, 0x03, 0x94, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 0x74, 0x03, 
 };
-	
+
+
+
